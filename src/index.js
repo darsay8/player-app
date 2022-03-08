@@ -1,5 +1,6 @@
 import { render } from 'react-dom';
-import App from './App';
+import PlayerApp from './PlayerApp';
+import './styles/app.scss';
 
 const root = document.getElementById('root');
-render(<App />, root);
+render(<PlayerApp />, root);
