@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faAngleLeft, faAngleRight, faPause } from '@fortawesome/free-solid-svg-icons';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
-const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
+const Player = ({ currentSong, isPlaying, setIsPlaying, audioRef }) => {
   const initialState = { currentTime: 0, duration: 0 };
   const [songInfo, setSongInfo] = useState(initialState);
 
-  const audioRef = useRef(null);
   const playSongHandler = () => {
     if (isPlaying) {
       audioRef.current.pause();
