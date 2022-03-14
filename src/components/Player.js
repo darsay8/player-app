@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faAngleLeft, faAngleRight, faPause } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
+import { getNewSongs, playAudio } from '../helpers/util';
 
 const Player = ({
   currentSong,
@@ -15,16 +16,7 @@ const Player = ({
   const [songInfo, setSongInfo] = useState(initialState);
 
   useEffect(() => {
-    const newSongs = songs.map(s => {
-      if (s.id === currentSong.id) {
-        return {
-          ...s,
-          active: true,
-        };
-      } else {
-        return { ...s, active: false };
-      }
-    });
+    const newSongs = getNewSongs(songs, currentSong);
     setSongs(newSongs);
   }, [currentSong]);
 
@@ -62,10 +54,12 @@ const Player = ({
     if (direction === 'skip-back') {
       if ((currentIndex - 1) % songs.length === -1) {
         setCurrentSong(songs[songs.length - 1]);
+        playAudio(isPlaying, audioRef);
         return;
       }
       setCurrentSong(songs[(currentIndex - 1) % songs.length]);
     }
+    playAudio(isPlaying, audioRef);
   };
 
   return (
@@ -79,7 +73,7 @@ const Player = ({
           value={songInfo.currentTime}
           type="range"
         />
-        <p>{getTime(songInfo.duration)}</p>
+        <p>{songInfo.duration ? getTime(songInfo.duration) : '0:00'}</p>
       </div>
       <div className="player-control">
         <FontAwesomeIcon

@@ -1,26 +1,11 @@
+import { getNewSongs, playAudio } from '../helpers/util';
+
 const LibrarySong = ({ songs, song, setCurrentSong, audioRef, isPlaying, setSongs }) => {
   const songSelectHandler = () => {
     setCurrentSong(song);
-
-    const newSongs = songs.map(s => {
-      if (s.id === song.id) {
-        return {
-          ...s,
-          active: true,
-        };
-      } else {
-        return { ...s, active: false };
-      }
-    });
-
+    const newSongs = getNewSongs(songs, song);
     setSongs(newSongs);
-
-    if (isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(audio => audioRef.current.play());
-      }
-    }
+    playAudio(isPlaying, audioRef);
   };
   return (
     <div
