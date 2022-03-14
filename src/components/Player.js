@@ -12,7 +12,7 @@ const Player = ({
   setCurrentSong,
   setSongs,
 }) => {
-  const initialState = { currentTime: 0, duration: 0 };
+  const initialState = { currentTime: 0, duration: 0, animationPercentage: 0 };
   const [songInfo, setSongInfo] = useState(initialState);
 
   useEffect(() => {
@@ -39,7 +39,10 @@ const Player = ({
   const timeUpdateHandler = e => {
     const currentTime = e.target.currentTime;
     const duration = e.target.duration;
-    setSongInfo({ ...songInfo, currentTime, duration });
+    const roundedCurrent = Math.round(currentTime);
+    const roundedDuration = Math.round(duration);
+    const animation = Math.round((roundedCurrent / roundedDuration) * 100);
+    setSongInfo({ ...songInfo, currentTime, duration, animationPercentage: animation });
   };
 
   const getTime = time => {
@@ -62,17 +65,28 @@ const Player = ({
     playAudio(isPlaying, audioRef);
   };
 
+  const trackAnimation = {
+    transform: `translateX(${songInfo.animationPercentage}%)`,
+  };
+
+  const backgroundTrack = {
+    background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+  };
+
   return (
     <div className="player">
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input
-          onChange={dragHandler}
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          type="range"
-        />
+        <div style={backgroundTrack} className="track">
+          <input
+            onChange={dragHandler}
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            type="range"
+          />
+          <div className="animate-track" style={trackAnimation}></div>
+        </div>
         <p>{songInfo.duration ? getTime(songInfo.duration) : '0:00'}</p>
       </div>
       <div className="player-control">
