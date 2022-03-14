@@ -1,11 +1,11 @@
-import { getNewSongs, playAudio } from '../helpers/util';
+import { getNewSongs } from '../helpers/util';
 
 const LibrarySong = ({ songs, song, setCurrentSong, audioRef, isPlaying, setSongs }) => {
-  const songSelectHandler = () => {
-    setCurrentSong(song);
+  const songSelectHandler = async () => {
+    await setCurrentSong(song);
     const newSongs = getNewSongs(songs, song);
     setSongs(newSongs);
-    playAudio(isPlaying, audioRef);
+    if (isPlaying) audioRef.current.play();
   };
   return (
     <div
