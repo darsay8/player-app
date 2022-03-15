@@ -63,3 +63,13 @@ input[type='range']::-webkit-slider-thumb {
   height: 16px;
   width: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .time-control {
+    width: 90%;
+  }
+
+  .player-control {
+    width: 60%;
+  }
+}
