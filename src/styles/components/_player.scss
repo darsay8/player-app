@@ -58,8 +58,18 @@
 input[type='range']:focus {
   outline: none;
 }
+
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+}
+
+input[type='range']::-moz-range-thumb {
+  -moz-appearance: none !important;
+  appearance: none !important;
+  // -moz-default-appearance: none;
   height: 16px;
   width: 16px;
 }

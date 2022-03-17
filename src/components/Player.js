@@ -11,14 +11,13 @@ const Player = ({
   songs,
   setCurrentSong,
   setSongs,
+  songInfo,
+  setSongInfo,
 }) => {
-  const initialState = { currentTime: 0, duration: 0, animationPercentage: 0 };
-  const [songInfo, setSongInfo] = useState(initialState);
-
-  useEffect(() => {
-    const newSongs = getNewSongs(songs, currentSong);
+  const activeLibraryHandler = current => {
+    const newSongs = getNewSongs(songs, current);
     setSongs(newSongs);
-  }, [currentSong]);
+  };
 
   const playSongHandler = () => {
     if (isPlaying) {
@@ -53,14 +52,17 @@ const Player = ({
     let currentIndex = songs.findIndex(s => s.id === currentSong.id);
     if (direction === 'skip-forward') {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+      activeLibraryHandler(songs[(currentIndex + 1) % songs.length]);
     }
     if (direction === 'skip-back') {
       if ((currentIndex - 1) % songs.length === -1) {
         await setCurrentSong(songs[songs.length - 1]);
+        activeLibraryHandler(songs[songs.length - 1]);
         if (isPlaying) audioRef.current.play();
         return;
       }
       await setCurrentSong(songs[(currentIndex - 1) % songs.length]);
+      activeLibraryHandler(songs[(currentIndex - 1) % songs.length]);
     }
     if (isPlaying) audioRef.current.play();
   };

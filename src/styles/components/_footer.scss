@@ -1,0 +1,31 @@
+footer {
+  min-height: 10vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.volume-control {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 15%;
+
+  input {
+    width: 70%;
+  }
+}
+
+.play-mode {
+  display: flex;
+  justify-content: space-around;
+  width: 10%;
+}
+
+.volume-icon {
+  width: 12%;
+  margin: 0;
+  display: block;
+  color: grey;
+}

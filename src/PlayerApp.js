@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import Footer from './components/Footer';
 import Library from './components/Library';
 import Nav from './components/Nav';
 import Player from './components/Player';
@@ -13,6 +14,9 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [libraryStatus, setLibraryStatus] = useState(false);
 
+  const initialState = { currentTime: 0, duration: 0, animationPercentage: 0, volume: 0.9 };
+  const [songInfo, setSongInfo] = useState(initialState);
+
   return (
     <div className={`App ${libraryStatus ? 'library-active' : ''}`}>
       <Nav libraryStatus={libraryStatus} setLibraryStatus={setLibraryStatus} />
@@ -25,6 +29,8 @@ function App() {
         setCurrentSong={setCurrentSong}
         songs={songs}
         setSongs={setSongs}
+        songInfo={songInfo}
+        setSongInfo={setSongInfo}
       />
       <Library
         audioRef={audioRef}
@@ -34,6 +40,7 @@ function App() {
         setSongs={setSongs}
         libraryStatus={libraryStatus}
       />
+      <Footer songInfo={songInfo} setSongInfo={setSongInfo} audioRef={audioRef} />
     </div>
   );
 }
