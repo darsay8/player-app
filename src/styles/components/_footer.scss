@@ -29,3 +29,77 @@ footer {
   display: block;
   color: grey;
 }
+
+form {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  max-width: 240px;
+
+  color: #545454;
+  border: 1px solid #cccccc;
+  padding: 24px;
+
+  display: grid;
+  grid-gap: 16px 8px;
+  grid-template-areas: 'label label' 'input eth' 'button button';
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  // display: none;
+  animation: fadein 0.4s 0.8s ease-in-out both;
+}
+
+form.has-eth {
+  display: grid;
+  animation: fadein 0.4s 0.8s ease-in-out both;
+}
+
+form label {
+  grid-area: label;
+
+  display: block;
+  font-size: 16px;
+}
+
+form input {
+  grid-area: input;
+
+  appearance: none;
+  width: 100%;
+  border: none;
+  padding: 8px;
+
+  font-variation-settings: 'wght' 600;
+  text-align: right;
+
+  border: 1px solid #cccccc;
+  color: #545454;
+  transition: border-color 0.2s ease-in-out;
+}
+
+form input:focus {
+  border: 1px solid #545454;
+  outline: none;
+}
+
+form span {
+  grid-area: eth;
+}
+
+form button {
+  grid-area: button;
+  appearance: none;
+  border: none;
+  background: #000000;
+  color: #ffffff;
+  font: inherit;
+  padding: 8px;
+  font-size: 16px;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: #545454;
+  }
+}

@@ -47,6 +47,12 @@ const Footer = ({ songInfo, setSongInfo, audioRef }) => {
           type="range"
         />
       </div>
+
+      <form>
+        <label>If you like my music, please consider sending me a tip!</label>
+        <input value="0.01" /> <span>ETH</span>
+        <button>Tip</button>
+      </form>
     </footer>
   );
 };

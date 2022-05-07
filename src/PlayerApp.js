@@ -7,7 +7,7 @@ import Song from './components/Song';
 
 import data from './data';
 
-function App() {
+const PlayerApp = () => {
   const audioRef = useRef(null);
   const [songs, setSongs] = useState(data());
   const [currentSong, setCurrentSong] = useState(songs[0]);
@@ -43,6 +43,6 @@ function App() {
       <Footer songInfo={songInfo} setSongInfo={setSongInfo} audioRef={audioRef} />
     </div>
   );
-}
+};
 
-export default App;
+export default PlayerApp;

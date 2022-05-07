@@ -26,3 +26,15 @@ h4 {
 .library-active {
   margin-left: 30%;
 }
+
+@keyframes fadein {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(100px, 24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
